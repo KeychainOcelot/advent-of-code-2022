@@ -1,4 +1,4 @@
-#include <cstdio>
+/*#include <cstdio>
 #include <cstdlib>
 
 int main() {
@@ -14,7 +14,26 @@ int main() {
     }
     printf("Elf with more cals has %ld cals.\n", max);
     return 0;
-}
+}*/
 
-int answer() {
+#include <iostream>
+#include <string>
+
+int main()
+{
+    std::string buf;
+    long int max = 0, sum = 0;
+    while(std::cin >> buf)
+    {
+        if(buf[0] == '\n')
+        {
+            if(sum > max)
+                max = sum;
+            sum = 0;
+            continue;
+        }
+        sum += std::stoi(buf);
+    }
+    std::cout << max << std::endl;
+    return 0;
 }
