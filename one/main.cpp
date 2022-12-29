@@ -1,23 +1,35 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
+#include <vector>
 
-int main()
+int main(int argc, char *argv[])
 {
-    long int max = 0, sum = 0, buf = 0;
-    std::fstream inFile, outFile;
-    std::string buffer;
-    inFile.open("./input.txt", std::ios::in);
-
-    while(getline(inFile, buffer))
-    {
-        buf = std::stol(buffer);
-        sum += buf;
-        if(sum > max) {
-            max = sum;
-        }
-        sum = 0;
+    std::string input = "./input.txt";
+    if(argc > 1) {
+        input = argv[1];
     }
-    std::cout << max << std::endl;
-    return 0;
+
+    std::string line;
+    std::fstream file(input);
+
+    std::vector<int> totals(1, 0);
+    while(std::getline(file, line))
+    {
+        if(line.size() == 0)
+        {
+            totals.emplace_back(0);
+        }
+        else
+        {
+            totals.back() += std::stoi(line);
+        }
+    }
+
+    std::nth_element(std::begin(totals), std::begin(totals) + 3, 
+            std::end(totals), std::greater<int>());
+    const auto sum = totals[0] + totals[1] + totals[2];
+    std::cout<<sum<<'\n';
+    return sum;
 }
