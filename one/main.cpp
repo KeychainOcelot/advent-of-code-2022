@@ -7,7 +7,8 @@
 int main(int argc, char *argv[])
 {
     std::string input = "./input.txt";
-    if(argc > 1) {
+    if (argc > 1)
+    {
         input = argv[1];
     }
 
@@ -15,9 +16,9 @@ int main(int argc, char *argv[])
     std::fstream file(input);
 
     std::vector<int> totals(1, 0);
-    while(std::getline(file, line))
+    while (std::getline(file, line))
     {
-        if(line.size() == 0)
+        if (line.size() == 0)
         {
             totals.emplace_back(0);
         }
@@ -27,9 +28,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    std::nth_element(std::begin(totals), std::begin(totals) + 3, 
-            std::end(totals), std::greater<int>());
+    std::nth_element(std::begin(totals), std::begin(totals) + 3,
+                     std::end(totals), std::greater<int>());
     const auto sum = totals[0] + totals[1] + totals[2];
-    std::cout<<sum<<'\n';
+    std::cout << sum << '\n';
     return sum;
 }
